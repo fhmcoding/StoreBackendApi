@@ -4,7 +4,7 @@ namespace App\Http\Controllers\V1\Backoffice\Products;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Backoffice\ProductResource;
-use App\Models\Product;
+use App\Models\ProductGroup;
 use Illuminate\Http\JsonResponse;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -15,8 +15,9 @@ class ShowController extends Controller
     {
         return $this->success(
             ProductResource::make(
-                QueryBuilder::for(Product::class)
-                    ->allowedIncludes('brand','category','images')
+                QueryBuilder::for(ProductGroup::class)
+                    ->with('products')
+                    ->allowedIncludes('brand','category','images','products')
                     ->findOrFail($id)
             )
         );

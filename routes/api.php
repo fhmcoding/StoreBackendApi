@@ -235,6 +235,6 @@ Route::prefix('brands')->group(function () {
     // Route::get('/{id}',App\Http\Controllers\V1\Client\Products\ShowController::class);
 });
 
-
+Route::post('/checkout',App\Http\Controllers\V1\Client\CheckoutController::class);
 
 

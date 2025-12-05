@@ -16,11 +16,12 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id')->unsigned()->nullable();
-            $table->unsignedBigInteger('brand_id')->unsigned()->nullable();
+
+            $table->unsignedBigInteger('product_group_id')->unsigned()->nullable();
+
             $table->string('name');
             $table->string('product_code')->nullable()->unique()->index();
-            $table->longtext('description');
+
             $table->decimal('price');
             $table->decimal('sale_price');
             $table->integer('stock_quantity')->default(0);
@@ -29,9 +30,10 @@ class CreateProductsTable extends Migration
         });
 
         Schema::table('products', function($table) {
-            $table->foreign('category_id')->references('id')->on('categories')->nullOnDelete();
-            $table->foreign('brand_id')->references('id')->on('brands')->nullOnDelete();
+            $table->foreign('product_group_id')->references('id')->on('product_groups')->nullOnDelete();
         });
+
+
     }
 
     /**

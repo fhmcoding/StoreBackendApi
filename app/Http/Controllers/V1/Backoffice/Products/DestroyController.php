@@ -14,7 +14,7 @@ class DestroyController extends Controller
     {
         return $this->success(
             ProductResource::make(
-                tap($product,fn (Product $product) => $product->images()->delete() && $product->delete())
+                tap($product,fn (Product $product) => $product->images()->delete() || $product->delete())
             )
         );
     }

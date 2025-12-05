@@ -17,18 +17,20 @@ class ProductResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'product_code' => $this->product_code,
+           // 'product_code' => $this->product_code,
             'name' => $this->name,
             'description' => $this->description,
-            'price' => $this->price,
-            'sale_price' => $this->sale_price,
-            'stock_quantity' => $this->stock_quantity,
+            // 'price' => $this->price,
+            // 'sale_price' => $this->sale_price,
+            // 'stock_quantity' => $this->stock_quantity,
             'is_active'=>$this->is_active,
             'image_url' => count($this->images) > 0 ? Storage::disk('public')->url($this->images[0]->image_url) : null,
             'category' => CategoryResource::make($this->whenLoaded('category')),
             'brand' => BrandResource::make($this->whenLoaded('brand')),
             'images' => ProductImageResource::collection($this->whenLoaded('images')),
-            'pivot' => $this->when($this->pivot !== null, $this->pivot)
+            'pivot' => $this->when($this->pivot !== null, $this->pivot),
+            'products' => $this->products,
+
         ];
     }
 }

@@ -20,11 +20,11 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RolesAndPermissionsTableSeeder::class,
             UserSeeder::class,
-            CustomerSeeder::class,
-            CategorySeeder::class,
-            BrandSeeder::class,
-            ProductSeeder::class,
-            OrderSeeder::class
+            // CustomerSeeder::class,
+            // CategorySeeder::class,
+            // BrandSeeder::class,
+            // ProductSeeder::class,
+            // OrderSeeder::class
         ]);
 
     }

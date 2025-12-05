@@ -18,9 +18,11 @@ class Brand extends Model
 
     protected $media = ['image_url'];
 
+
+
     public function products():HasMany
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(ProductGroup::class);
     }
 
 }

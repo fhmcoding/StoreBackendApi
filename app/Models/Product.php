@@ -19,26 +19,60 @@ class Product extends Model
     {
         parent::boot();
 
-        self::created(function($model){
-            $model->product_code = $model->generateProductCode();
-            $model->save();
-        });
+        // self::created(function($model){
+        //     $model->product_code = $model->generateProductCode();
+        //     $model->save();
+        // });
     }
 
-    public function images():HasMany
+    public function images()
     {
-        return $this->hasMany(ProductImage::class);
+        return $this->hasManyThrough(
+            ProductImage::class,    // Final model we want
+            ProductGroup::class,    // Intermediate model
+            'id',   // Foreign key on users table
+            'id',      // Foreign key on posts table
+            'product_group_id',           // Local key on countries
+            'image_id'            // Local key on users
+        );
     }
 
-    public function brand():BelongsTo
+    //  public function images():HasMany
+    // {
+    //     return $this->hasMany(ProductImage::class);
+    // }
+
+    public function productGroup():BelongsTo
     {
-        return $this->belongsTo(Brand::class);
+         return $this->belongsTo(ProductGroup::class);
     }
 
-    public function category():BelongsTo
+
+
+    public function brand()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasOneThrough(
+            Brand::class,
+            ProductGroup::class,
+            'id',            // Foreign key on ProductGroup table
+            'id',            // Foreign key on Brand table
+            'product_group_id', // Local key on Product table
+            'brand_id'          // Local key on ProductGroup table
+        );
     }
+
+    public function category()
+{
+    return $this->hasOneThrough(
+        Category::class,
+        ProductGroup::class,
+        'id',               // Foreign key on ProductGroup
+        'id',               // FK on Category
+        'product_group_id', // FK on Product table
+        'category_id'       // FK on ProductGroup table
+    );
+}
+
 
     public function generateProductCode():string
     {

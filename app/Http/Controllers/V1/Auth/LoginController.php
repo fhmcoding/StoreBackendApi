@@ -17,7 +17,7 @@ class LoginController extends Controller
 
     public function __invoke(LoginRequest $request):JsonResponse
     {
-        if ($user = User::query()->where('email', $request->input('email'))->first()) {
+        if ($user = User::query()->where('phone_number', $request->input('phone_number'))->first()) {
             if (password_verify($request->input('password'), $user->password)) {
                 return response()->json([
                     'message' => __('Sign In Successful'),
@@ -28,12 +28,12 @@ class LoginController extends Controller
                 ]);
             }
             return response()->json([
-                'message' => __('Email number or Password not correct !'),
+                'message' => __('phone number or Password not correct !'),
             ], Response::HTTP_NOT_FOUND);
         }
 
         return response()->json([
-            'message' => __('Email number does not exist'),
+            'message' => __('phone number does not exist'),
         ], Response::HTTP_NOT_FOUND);
     }
 

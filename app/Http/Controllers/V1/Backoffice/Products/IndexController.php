@@ -4,7 +4,7 @@ namespace App\Http\Controllers\V1\Backoffice\Products;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Backoffice\ProductResource;
-use App\Models\Product;
+use App\Models\ProductGroup;
 use Illuminate\Http\JsonResponse;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -15,7 +15,8 @@ class IndexController extends Controller
     {
         return $this->success(
             ProductResource::collection(
-                QueryBuilder::for(Product::class)
+                QueryBuilder::for(ProductGroup::class)
+                    ->with('images','products')
                     ->allowedIncludes('category','brand')
                     ->latest()
                     ->optionalPagination()
