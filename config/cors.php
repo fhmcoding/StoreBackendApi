@@ -25,7 +25,11 @@ return [
     'allowed_origins' => [
         'https://storeapi.fhmcoding.com',
         'http://storeapi.fhmcoding.com',
-        'storeapi.fhmcoding.com'
+        'storeapi.fhmcoding.com',
+        'store.fhmcoding.com',
+        'https://store.fhmcoding.com',
+        'http://store.fhmcoding.com'
+
     ],
 
     'allowed_origins_patterns' => [],
