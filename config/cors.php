@@ -18,9 +18,15 @@ return [
 
     'paths' => ['*'],
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => [
+       '*'
+    ],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [
+        'https://storeapi.fhmcoding.com',
+        'http://storeapi.fhmcoding.com',
+        'storeapi.fhmcoding.com'
+    ],
 
     'allowed_origins_patterns' => [],
 
