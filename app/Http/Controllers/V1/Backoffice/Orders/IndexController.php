@@ -15,6 +15,7 @@ class IndexController extends Controller
         return $this->success(
             OrderResource::collection(
                 QueryBuilder::for(Order::class)
+                    ->with('user','customer','statusHistory')
                     ->allowedIncludes('products','customer','productsCount')
                     ->latest()
                     ->optionalPagination()

@@ -25,7 +25,9 @@ class OrderResource extends JsonResource
             'products_count'=>$this->when($this->products_count !== null, $this->products_count),
             'user' => UserResource::make($this->whenLoaded('user')),
             'customer' => CustomerResource::make($this->whenLoaded('customer')),
-            'products' => ProductResource::collection($this->whenLoaded('products'))
+            'products' => ProductResource::collection($this->whenLoaded('products')),
+            'user_notes' => $this->user_notes,
+            'status_history' => $this->whenLoaded('statusHistory')
         ];
     }
 }

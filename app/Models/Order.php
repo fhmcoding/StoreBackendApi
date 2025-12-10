@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
 use App\Traits\OptionalPagination;
 
@@ -49,9 +50,15 @@ class Order extends Model
     {
         return $this
             ->belongsToMany(Product::class, 'order_products', 'order_id','product_id')
-            ->withPivot(['id','quantity','price'])
+            ->withPivot(['id','quantity','price','original_price'])
             ->using(OrderProduct::class);
     }
+
+     public function statusHistory():HasMany
+    {
+        return $this->hasMany(OrderStatusHistory::class);
+    }
+
 
 
     function getSubTotalAttribute()

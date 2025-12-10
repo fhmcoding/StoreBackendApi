@@ -28,6 +28,7 @@ class ProductResource extends JsonResource
             'category' => CategoryResource::make($this->whenLoaded('category')),
             'brand' => BrandResource::make($this->whenLoaded('brand')),
             'images' => ProductImageResource::collection($this->whenLoaded('images')),
+            'product'=>$this->whenLoaded('productGroup'),
             'pivot' => $this->when($this->pivot !== null, $this->pivot),
             'products' => $this->products,
 

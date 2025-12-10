@@ -16,7 +16,7 @@ class ShowController extends Controller
         return $this->success(
             ProductResource::make(
                 QueryBuilder::for(ProductGroup::class)
-                    ->with('products')
+                    ->with('products','products.offers')
                     ->allowedIncludes('brand','category','images')
                     ->findOrFail($product->id)
             )

@@ -13,10 +13,11 @@ class IndexController extends Controller
 
     public function __invoke():JsonResponse
     {
+        // with offers
         return $this->success(
             ProductResource::collection(
                 QueryBuilder::for(ProductGroup::class)
-                    ->with('products')
+                    ->with('products','products.offers')
                     ->allowedIncludes('category','brand')
                     ->allowedFilters('category.name','brand.name','name')
                     // ->active()

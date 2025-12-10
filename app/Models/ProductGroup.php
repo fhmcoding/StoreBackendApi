@@ -42,4 +42,6 @@ class ProductGroup extends Model
         return $query->where('product_groups.is_active',true);
     }
 
+
+
 }

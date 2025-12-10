@@ -133,6 +133,40 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
         )->middleware('permission:brand-delete')->name('delete');
     });
 
+    Route::prefix('offers')->as('offers:')->group(function () {
+        Route::get(
+            '/',
+            App\Http\Controllers\V1\Backoffice\Offers\IndexController::class
+        )->middleware('permission:offer-list')->name('index');
+
+        // Route::get(
+        //     '/{id}',
+        //     App\Http\Controllers\V1\Backoffice\Brands\ShowController::class
+        // )->middleware('permission:brand-list')->name('show');
+
+        Route::put(
+            '/{offer}',
+            App\Http\Controllers\V1\Backoffice\Offers\UpdateController::class
+        )->middleware('permission:offer-edit')->name('edit');
+
+        Route::post(
+            '/',
+            App\Http\Controllers\V1\Backoffice\Offers\StoreController::class
+        )->middleware('permission:offer-create')->name('create');
+
+        Route::delete(
+            '/{offer}',
+            App\Http\Controllers\V1\Backoffice\Offers\DestroyController::class
+        )->middleware('permission:offer-delete')->name('delete');
+
+
+
+        Route::delete(
+            '/{offer}/delete_product/{product_id}',
+            App\Http\Controllers\V1\Backoffice\Offers\DestroyProductController::class
+        )->middleware('permission:offer-delete')->name('delete.product');
+
+    });
 
     Route::prefix('categories')->as('categories:')->group(function () {
         Route::get(
@@ -161,6 +195,12 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
             '/',
             App\Http\Controllers\V1\Backoffice\Products\IndexController::class
         )->middleware('permission:product-list')->name('index');
+
+        Route::get(
+            '/list',
+            App\Http\Controllers\V1\Backoffice\Products\ListController::class
+        )->middleware('permission:product-list')->name('list');
+
 
         Route::delete(
             '/image/{id}',
@@ -204,6 +244,12 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
             App\Http\Controllers\V1\Backoffice\Orders\DestroyController::class
         )->middleware('permission:order-delete')->name('delete');
 
+
+        Route::put(
+            '/{order}',
+            App\Http\Controllers\V1\Backoffice\Orders\UpdateController::class
+        )->middleware('permission:order-edit')->name('edit');
+
     });
 
     Route::prefix('statistic')->as('statistic:')->group(function () {
@@ -238,3 +284,6 @@ Route::prefix('brands')->group(function () {
 Route::post('/checkout',App\Http\Controllers\V1\Client\CheckoutController::class);
 
 
+
+Route::post('/auth/client/login',App\Http\Controllers\V1\Auth\Client\LoginController::class);
+Route::post('/auth/client/register',App\Http\Controllers\V1\Auth\Client\RegisterController::class);

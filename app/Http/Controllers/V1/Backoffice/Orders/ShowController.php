@@ -18,6 +18,7 @@ class ShowController extends Controller
         return $this->success(
             OrderResource::make(
                 QueryBuilder::for(Order::class)
+                    ->with('products.productGroup','statusHistory')
                     ->allowedIncludes('products','customer','user')
                     ->findOrFail($id)
             )

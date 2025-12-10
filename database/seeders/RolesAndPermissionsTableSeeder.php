@@ -55,6 +55,11 @@ class RolesAndPermissionsTableSeeder extends Seeder
             'order-edit',
             'order-delete',
 
+            'offer-list',
+            'offer-create',
+            'offer-edit',
+            'offer-delete',
+
             'statistic-summary'
         ];
 

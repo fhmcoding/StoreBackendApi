@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use App\Traits\OptionalPagination;
 
 class Product extends Model
@@ -25,16 +26,28 @@ class Product extends Model
         // });
     }
 
+
+    public function offers():BelongsToMany
+    {
+        return $this
+            ->belongsToMany(Offer::class, 'offer_products','product_id' ,'offer_id')
+            ->withPivot(['price'])
+            ->using(OfferProduct::class);
+
+
+    }
+
+
     public function images()
     {
-        return $this->hasManyThrough(
-            ProductImage::class,    // Final model we want
-            ProductGroup::class,    // Intermediate model
-            'id',   // Foreign key on users table
-            'id',      // Foreign key on posts table
-            'product_group_id',           // Local key on countries
-            'image_id'            // Local key on users
-        );
+       return $this->hasManyThrough(
+        ProductImage::class,   // Final model
+        ProductGroup::class,   // Intermediate model
+        'id',                  // FK on product_groups (product_groups.id)
+        'product_group_id',    // FK on product_images
+        'product_group_id',    // Local key on products
+        'id'                   // Local key on product_groups
+    );
     }
 
     //  public function images():HasMany

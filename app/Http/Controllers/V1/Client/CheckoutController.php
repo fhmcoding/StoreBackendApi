@@ -17,23 +17,27 @@ class CheckoutController extends Controller
 
     public function __invoke(Request $request):JsonResponse
     {
-        if(isset($request->customer) ){
+
+
+        if(isset($request->customer) && strlen($request->customer['phone_number']) > 5 ){
             $customer = Customer::create($request->customer);
         }
 
         $order = Order::create([
-            'user_id' => Auth::check() ? auth()->user()->id() : null,
-            'customer_id' => isset($customer) ? null : $customer->id,
+            'user_id' => Auth::check() ? auth()->user()->id : null,
+            'customer_id' => strlen($request->customer['phone_number']) > 5 ? $customer->id : null,
         ]);
 
         foreach ($request->products as $key => $product) {
-            $p = Product::where('product_code')->first();
+            $p = Product::where('product_code',$product['product_id'])->first();
             if(isset($p)){
                 OrderProduct::create([
                     'order_id'=> $order->id,
                     'product_id' => $p->id,
-                    'quantity' => $product->quantity,
-                    'price' => $product->price,
+                    'quantity' => $product['quantity'],
+                    'price' => $product['price'],
+                    'original_price' => $p->price,
+                    'offer_id' => count($product['product']['offers']) > 0 ? $product['product']['offers'][0]['id'] : null
                 ]);
             }
         }
