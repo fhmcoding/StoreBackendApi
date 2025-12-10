@@ -28,7 +28,10 @@ return [
         'storeapi.fhmcoding.com',
         'store.fhmcoding.com',
         'https://store.fhmcoding.com',
-        'http://store.fhmcoding.com'
+        'http://store.fhmcoding.com',
+        'http://localhost*',
+        'http://127.0.0.1*',
+        '*'
 
     ],
 
