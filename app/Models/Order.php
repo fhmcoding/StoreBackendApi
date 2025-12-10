@@ -16,7 +16,7 @@ class Order extends Model
     use OptionalPagination;
 
     protected $guarded = ['id'];
-    protected $appends = ['status','delivery_fee','sub_total','total'];
+    protected $appends = ['delivery_fee','sub_total','total'];
 
     public const PENDING = 'pending';
     public const CONFIRMED = 'confirmed';
@@ -73,10 +73,10 @@ class Order extends Model
         return $this->sub_total + $this->delivery_fee;
     }
 
-    function getStatusAttribute()
-    {
-        return $this->delivery_status == Order::PENDING ? $this->confiramtion_status : $this->delivery_status;
-    }
+    // function getStatusAttribute()
+    // {
+    //     return $this->delivery_status == Order::PENDING ? $this->confiramtion_status : $this->delivery_status;
+    // }
 
     public function getDeliveryFeeAttribute()
     {
