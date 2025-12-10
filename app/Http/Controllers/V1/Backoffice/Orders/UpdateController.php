@@ -29,6 +29,7 @@ class UpdateController extends Controller
         }
 
         $order->update([
+            'status' => $request->status,
             'user_notes' => $request->user_notes,
             'address' => $request->address
         ]);
