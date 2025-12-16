@@ -26,7 +26,7 @@ class UpdateController extends Controller
 
         return $this->success(
             UserResource::make(
-                (tap(Auth::user())
+                (tap(auth()->user())
                     ->update($data))
                     ->refresh()
             )
