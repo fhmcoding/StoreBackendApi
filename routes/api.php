@@ -287,3 +287,4 @@ Route::post('/checkout',App\Http\Controllers\V1\Client\CheckoutController::class
 
 Route::post('/auth/client/login',App\Http\Controllers\V1\Auth\Client\LoginController::class);
 Route::post('/auth/client/register',App\Http\Controllers\V1\Auth\Client\RegisterController::class);
+Route::put('/auth/client/update',App\Http\Controllers\V1\Auth\Client\UpdateController::class);
