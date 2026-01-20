@@ -31,7 +31,11 @@ return [
         'http://store.fhmcoding.com',
         'http://localhost*',
         'http://127.0.0.1*',
-        '*'
+        '*',
+        'https://scentavenue.shop',
+        'http://scentavenue.shop',
+        'https://storeapi.scentavenue.shop',
+        'storeapi.scentavenue.shop',
 
     ],
 
