@@ -8,6 +8,6 @@ trait OptionalPagination
 {
     public function scopeOptionalPagination(Builder $query)
     {
-        return request()->has('all') ? $query->get() : $query->paginate(10);
+        return request()->has('all') ? $query->get() : $query->paginate(50);
     }
 }
