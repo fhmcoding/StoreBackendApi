@@ -25,7 +25,7 @@ class UsersController extends Controller
                 QueryBuilder::for(User::class)
                     ->allowedFilters('name', 'email')
                     ->allowedIncludes('roles')
-                    ->optionalPagination()
+                    ->get()
             )->response()->getData(true)
         );
     }
