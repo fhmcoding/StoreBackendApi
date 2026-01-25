@@ -45,7 +45,7 @@ class UploadProducts extends Command
         ProductGroup::query()->delete();
         Product::query()->delete();
 
-        $path = storage_path('app/products.csv');
+        $path = public_path('products.csv');
 
         $rows = array_map('str_getcsv', file($path));
 
