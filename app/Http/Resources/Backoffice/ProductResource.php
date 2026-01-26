@@ -24,6 +24,7 @@ class ProductResource extends JsonResource
             'sale_price' => $this->sale_price,
             'stock_quantity' => $this->stock_quantity,
             'is_active'=>$this->is_active,
+            'brand_id' => $this->brand_id,
             'image_url' => count($this->images) > 0 ? Storage::disk('public')->url($this->images[0]->image_url) : null,
             'category' => CategoryResource::make($this->whenLoaded('category')),
             'brand' => BrandResource::make($this->whenLoaded('brand')),
