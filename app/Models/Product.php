@@ -64,14 +64,17 @@ class Product extends Model
 
     public function brand()
     {
-        return $this->hasOneThrough(
-            Brand::class,
-            ProductGroup::class,
-            'id',            // Foreign key on ProductGroup table
-            'id',            // Foreign key on Brand table
-            'product_group_id', // Local key on Product table
-            'brand_id'          // Local key on ProductGroup table
-        );
+
+          return $this->belongsTo(Brand::class);
+
+        // return $this->hasOneThrough(
+        //     Brand::class,
+        //     ProductGroup::class,
+        //     'id',            // Foreign key on ProductGroup table
+        //     'id',            // Foreign key on Brand table
+        //     'product_group_id', // Local key on Product table
+        //     'brand_id'          // Local key on ProductGroup table
+        // );
     }
 
     public function category()
