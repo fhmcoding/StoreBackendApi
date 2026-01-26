@@ -72,7 +72,11 @@ class UploadProducts extends Command
         foreach ($products as $key => $product) {
 
             $this->info($product['brand']);
-            $brand = Brand::where('name', 'LIKE', '%' . $product['brand'] . '%')->first();
+
+            $brand = Brand::whereRaw(
+                'LOWER(name) LIKE ?',
+                ['%' . strtolower($product['brand']) . '%']
+            )->first();
 
             if(!isset($brand)){
                 $brand = Brand::create([
