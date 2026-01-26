@@ -71,7 +71,7 @@ class UploadProducts extends Command
 
         foreach ($products as $key => $product) {
 
-            $this->info($product['brand']);
+
 
             $brand = Brand::whereRaw(
                 'LOWER(name) LIKE ?',
@@ -82,6 +82,9 @@ class UploadProducts extends Command
                 $brand = Brand::create([
                     'name' => $product['brand']
                 ]);
+            }
+            else {
+                $this->info($brand->name);
             }
             if(Product::where('product_code',$product['product_code'])->count() == 0){
                 Product::create([
