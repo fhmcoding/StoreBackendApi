@@ -22,7 +22,7 @@ class Brand extends Model
 
     public function products():HasMany
     {
-        return $this->hasMany(ProductGroup::class);
+        return $this->hasMany(Product::class);
     }
 
 }
