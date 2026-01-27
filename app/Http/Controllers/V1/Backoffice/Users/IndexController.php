@@ -15,7 +15,7 @@ class IndexController extends Controller
         return $this->success(
             UserResource::collection(
                 QueryBuilder::for(User::class)
-                    ->allowedFilters('name', 'email')
+                    ->allowedFilters('first_name', 'last_name','type')
                     ->allowedIncludes('roles')
                     ->optionalPagination()
             )->response()->getData(true)

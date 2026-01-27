@@ -27,7 +27,8 @@ class OrderResource extends JsonResource
             'customer' => CustomerResource::make($this->whenLoaded('customer')),
             'products' => ProductResource::collection($this->whenLoaded('products')),
             'user_notes' => $this->user_notes,
-            'status_history' => $this->whenLoaded('statusHistory')
+            'status_history' => $this->whenLoaded('statusHistory'),
+            'type' => $this->type,
         ];
     }
 }
