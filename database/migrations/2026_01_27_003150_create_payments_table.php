@@ -19,7 +19,7 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger('user_id')->unsigned()->nullable();
             $table->unsignedBigInteger('order_id')->unsigned()->nullable();
             $table->decimal('amount',10,2);
-            $table->stirng('payment_method')->nullable();
+            $table->string('payment_method')->nullable();
 
             $table->timestamps();
         });
