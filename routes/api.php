@@ -250,6 +250,11 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
             App\Http\Controllers\V1\Backoffice\Orders\UpdateController::class
         )->middleware('permission:order-edit')->name('edit');
 
+        Route::post(
+            '/checkout',
+            App\Http\Controllers\V1\Backoffice\Orders\CheckoutController::class
+        )->middleware('permission:order-edit')->name('edit');
+
     });
 
     Route::prefix('statistic')->as('statistic:')->group(function () {
