@@ -29,6 +29,7 @@ class OrderResource extends JsonResource
             'user_notes' => $this->user_notes,
             'status_history' => $this->whenLoaded('statusHistory'),
             'type' => $this->type,
+            'payments' => $this->payments
         ];
     }
 }
