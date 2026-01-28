@@ -253,7 +253,7 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
         Route::post(
             '/checkout',
             App\Http\Controllers\V1\Backoffice\Orders\CheckoutController::class
-        )->middleware('permission:order-edit')->name('edit');
+        )->middleware('permission:order-edit')->name('checkout');
 
     });
 
