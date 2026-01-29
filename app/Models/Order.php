@@ -46,6 +46,11 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function caissier():BelongsTo
+    {
+        return $this->belongsTo(User::class,'caissier_id');
+    }
+
     public function products():BelongsToMany
     {
         return $this

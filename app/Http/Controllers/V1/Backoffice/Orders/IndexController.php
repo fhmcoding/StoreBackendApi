@@ -15,7 +15,7 @@ class IndexController extends Controller
         return $this->success(
             OrderResource::collection(
                 QueryBuilder::for(Order::class)
-                    ->with('user','customer','statusHistory')
+                    ->with('user','customer','statusHistory','user','caissier')
                     ->allowedIncludes('products','payments','customer','productsCount')
                     ->allowedFilters('caissier_id','created_at')
                     ->where('caissier_id',auth()->user()->id)
