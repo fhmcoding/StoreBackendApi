@@ -15,8 +15,8 @@ class IndexController extends Controller
     {
         return $this->success(
             ProductResource::collection(
-                QueryBuilder::for(ProductGroup::class)
-                    ->with('images','products')
+                QueryBuilder::for(Product::class)
+                    ->with('images')
                     ->allowedIncludes('category','brand')
                     ->latest()
                     ->optionalPagination()
