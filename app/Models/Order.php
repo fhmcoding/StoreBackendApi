@@ -75,7 +75,8 @@ class Order extends Model
 
     function getTotalAttribute()
     {
-        return $this->sub_total + $this->delivery_fee;
+
+        return $this->sub_total;
     }
 
     // function getStatusAttribute()
