@@ -17,6 +17,7 @@ class IndexController extends Controller
                 QueryBuilder::for(Order::class)
                     ->with('user','customer','statusHistory')
                     ->allowedIncludes('products','customer','productsCount')
+                    ->allowedFilters('caissier_id','created_at')
                     ->latest()
                     ->optionalPagination()
             )->response()->getData(true)

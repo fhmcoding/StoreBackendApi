@@ -19,6 +19,7 @@ class CheckoutController extends Controller
     {
         $order = Order::create([
             'user_id' => $request->has('user_id') ? $request->user_id : auth()->user()->id,
+            'caissier_id' =>  auth()->user()->id,
             'status' => Order::DELIVERED,
             'type' => 'caisse',
         ]);
