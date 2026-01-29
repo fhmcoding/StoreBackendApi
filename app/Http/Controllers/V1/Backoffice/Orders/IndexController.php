@@ -16,8 +16,9 @@ class IndexController extends Controller
             OrderResource::collection(
                 QueryBuilder::for(Order::class)
                     ->with('user','customer','statusHistory')
-                    ->allowedIncludes('products','customer','productsCount')
+                    ->allowedIncludes('products','payments','customer','productsCount')
                     ->allowedFilters('caissier_id','created_at')
+                    ->where('caissier_id',auth()->user()->id)
                     ->latest()
                     ->optionalPagination()
             )->response()->getData(true)
