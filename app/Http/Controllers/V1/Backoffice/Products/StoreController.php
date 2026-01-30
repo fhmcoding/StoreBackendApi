@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use App\Http\Resources\Backoffice\ProductResource;
 use App\Http\Requests\Backoffice\ProductRequest;
-use App\Models\ProductGroup;
+use App\Models\Product;
 use Storage;
 
 class StoreController extends Controller
@@ -20,19 +20,23 @@ class StoreController extends Controller
             }
         }
 
-        return $this->success(
-            ProductResource::make(
-                tap(
-                    ProductGroup::query()->create($request->validated()),
-                    fn (ProductGroup $productGroup) => $productGroup->products()->createMany($request->products) && $productGroup->images()
-                                                     ->createMany(collect($request->images)->map(function ($image){
-                                                            return [
-                                                            'image_url' => '/products/'.$image
-                                                            ];
-                                                        }))
 
-                )
-            )
+        foreach($request->products as $product){
+            Product::create([
+                'brand_id' => $request->brand_id,
+                'category_id' => $request->category_id,
+                'name' => $request->name .' '. $product['name'],
+                'product_code' => $product['product_code'],
+                'price' => $product['price'],
+                'sale_price' => $product['sale_price'],
+                'stock_quantity' => $product['stock_quantity']
+            ]);
+        }
+
+        return $this->success(
+            [
+                'succes' => true
+            ]
         );
     }
 }
