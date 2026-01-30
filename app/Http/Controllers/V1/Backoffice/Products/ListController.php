@@ -22,7 +22,7 @@ class ListController extends Controller
          return $this->success(
             ProductResource::collection(
                 QueryBuilder::for(Product::class)
-                    ->with('images','productGroup')
+                     ->with('images','category','brand')
                     ->allowedIncludes('category','brand')
                     ->latest()
                     ->optionalPagination()

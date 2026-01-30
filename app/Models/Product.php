@@ -81,16 +81,17 @@ class Product extends Model
     }
 
     public function category()
-{
-    return $this->hasOneThrough(
-        Category::class,
-        ProductGroup::class,
-        'id',               // Foreign key on ProductGroup
-        'id',               // FK on Category
-        'product_group_id', // FK on Product table
-        'category_id'       // FK on ProductGroup table
-    );
-}
+    {
+         return $this->belongsTo(Category::class);
+        // return $this->hasOneThrough(
+        //     Category::class,
+        //     ProductGroup::class,
+        //     'id',               // Foreign key on ProductGroup
+        //     'id',               // FK on Category
+        //     'product_group_id', // FK on Product table
+        //     'category_id'       // FK on ProductGroup table
+        // );
+    }
 
 
     public function generateProductCode():string
