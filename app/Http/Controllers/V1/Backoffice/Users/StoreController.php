@@ -18,6 +18,11 @@ class StoreController extends Controller
                     'name' => $request->input('name'),
                     'email' => $request->input('email'),
                     'password' => bcrypt($request->input('password')),
+                    'tpe' => $request->tpe,
+                    'cache' => $request->cache,
+                    'credit' => $request->credit,
+                    'virement' => $request->virement,
+                    'cheque' => $request->cheque
                 ])->assignRole($request->input('role_id'))
             )
         );

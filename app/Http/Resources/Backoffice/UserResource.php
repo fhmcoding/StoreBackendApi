@@ -21,7 +21,14 @@ class UserResource extends JsonResource
             'phone_number' => $this->phone_number,
             'type' => $this->type,
             'is_active'=>$this->is_active,
-            'roles'=> RoleResource::collection($this->roles)
+            'roles'=> RoleResource::collection($this->roles),
+            'payment_methods' => [
+                'cache' => $this->cache,
+                'tpe' => $this->tpe,
+                'virement' => $this->virement,
+                'cheque' => $this->cheque,
+                'credit' => $this->credit
+            ]
         ];
     }
 }

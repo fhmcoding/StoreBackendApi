@@ -26,7 +26,7 @@ class User extends Authenticatable
 
 
     protected $fillable = [
-        'first_name', 'last_name', 'phone_number', 'password', 'is_active'
+        'first_name', 'last_name', 'phone_number', 'password', 'is_active','cache','tpe','virement','cheque','credit'
     ];
 
     /**
@@ -45,7 +45,12 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
+        'cache'=> 'boolean',
+        'tpe' => 'boolean',
+        'credit' => 'boolean',
+        'virement' => 'boolean',
+        'cheque' => 'boolean'
     ];
 
 
