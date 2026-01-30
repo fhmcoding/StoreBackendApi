@@ -40,14 +40,17 @@ class Product extends Model
 
     public function images()
     {
-       return $this->hasManyThrough(
-        ProductImage::class,   // Final model
-        ProductGroup::class,   // Intermediate model
-        'id',                  // FK on product_groups (product_groups.id)
-        'product_group_id',    // FK on product_images
-        'product_group_id',    // Local key on products
-        'id'                   // Local key on product_groups
-    );
+
+        return $this->hasMany(ProductImage::class);
+
+        // return $this->hasManyThrough(
+        //     ProductImage::class,   // Final model
+        //     ProductGroup::class,   // Intermediate model
+        //     'id',                  // FK on product_groups (product_groups.id)
+        //     'product_group_id',    // FK on product_images
+        //     'product_group_id',    // Local key on products
+        //     'id'                   // Local key on product_groups
+        // );
     }
 
     //  public function images():HasMany
