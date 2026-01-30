@@ -26,6 +26,7 @@ class StoreController extends Controller
                 'brand_id' => $request->brand_id,
                 'category_id' => $request->category_id,
                 'name' => $request->name .' '. $product['name'],
+                'description' => $request->description,
                 'product_code' => $product['product_code'],
                 'price' => $product['price'],
                 'sale_price' => $product['sale_price'],

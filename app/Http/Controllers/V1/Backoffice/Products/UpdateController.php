@@ -29,6 +29,7 @@ class UpdateController extends Controller
                         'brand_id' => $request->brand_id,
                         'category_id' => $request->category_id,
                         'name' => $request->name,
+                        'description' => $request->description,
                         'product_code' => $request->product_code,
                         'price' => $request->price,
                         'sale_price' => $request->sale_price,
