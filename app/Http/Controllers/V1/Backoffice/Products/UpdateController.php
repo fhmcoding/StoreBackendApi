@@ -33,7 +33,8 @@ class UpdateController extends Controller
                         'product_code' => $request->product_code,
                         'price' => $request->price,
                         'sale_price' => $request->sale_price,
-                        'stock_quantity' => $request->stock_quantity
+                        'stock_quantity' => $request->stock_quantity,
+                        'is_active' => $request->is_active
                     ]);
 
                     // foreach ($request->products as $key => $v) {
