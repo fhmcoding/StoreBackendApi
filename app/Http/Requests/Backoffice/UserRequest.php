@@ -28,24 +28,24 @@ class UserRequest extends FormRequest
             'first_name' => 'required|max:100',
             'last_name' => 'required|max:100',
             'phone_number' => 'required',
-            'password' => 'required|min:8|max:100',
+            'password' => 'min:8|max:100',
             'role_id' => 'required|exists:roles,id',
             'is_active'=>'required|boolean'
         ];
 
-        if (
-            $this->email != null
-            &&
-            ($this->isMethod('PUT') || $this->input('_method') == 'PUT')
-        ) {
-            $rules['email'] = [
-                'email',
-                'required',
-                Rule::unique('users')->ignore($this->route('user')->id),
-            ];
+        // if (
+        //     $this->email != null
+        //     &&
+        //     ($this->isMethod('PUT') || $this->input('_method') == 'PUT')
+        // ) {
+        //     $rules['email'] = [
+        //         'email',
+        //         'required',
+        //         Rule::unique('users')->ignore($this->route('user')->id),
+        //     ];
 
-            $rules['password'] = ['nullable'];
-        }
+        //     $rules['password'] = ['nullable'];
+        // }
 
         return $rules;
     }
