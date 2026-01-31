@@ -25,8 +25,9 @@ class UserRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => 'required|max:100',
-            'email' => 'required|email|unique:users',
+            'first_name' => 'required|max:100',
+            'last_name' => 'required|max:100',
+            'phone_number' => 'required',
             'password' => 'required|min:8|max:100',
             'role_id' => 'required|exists:roles,id',
             'is_active'=>'required|boolean'

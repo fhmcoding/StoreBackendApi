@@ -16,14 +16,16 @@ class UpdateController extends Controller
             UserResource::make(
                 (tap($user)
                     ->update([
-                        'name' => $request->input('name'),
-                        'email' => $request->input('email'),
+                        'first_name' => $request->input('first_name'),
+                        'last_name' => $request->input('last_name'),
+                        'phone_number' => $request->input('phone_number'),
                         'password' => bcrypt($request->input('password')),
                         'tpe' => $request->tpe,
                         'cache' => $request->cache,
                         'credit' => $request->credit,
                         'virement' => $request->virement,
-                        'cheque' => $request->cheque
+                        'cheque' => $request->cheque,
+                        'type' => $request->type
                     ]))
                     ->syncRoles($request->input('role_id'))
                     ->refresh()
