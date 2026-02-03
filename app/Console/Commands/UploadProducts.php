@@ -42,63 +42,63 @@ class UploadProducts extends Command
     public function handle()
     {
 
-        ProductGroup::query()->delete();
-        Product::query()->delete();
+        \App\Models\Order::query()->delete();
+        \App\Models\Payment::query()->delete();
 
-        $path = public_path('products.csv');
+        // $path = public_path('products.csv');
 
-        $rows = array_map('str_getcsv', file($path));
+        // $rows = array_map('str_getcsv', file($path));
 
-        $products = [];
+        // $products = [];
 
-        foreach ($rows as $row) {
-            $row = str_getcsv(implode(';', $row), ';');
+        // foreach ($rows as $row) {
+        //     $row = str_getcsv(implode(';', $row), ';');
 
-            if (count($row) < 6) {
-                continue;
-            }
+        //     if (count($row) < 6) {
+        //         continue;
+        //     }
 
-            $products[] = [
-                'name' => trim($row[0]),
-                'price'    => (float) str_replace(',', '.', $row[1]),
-                'sale_price'   => (float) str_replace(',', '.', $row[2]),
-                'stock_quantity'        => (int) $row[3],
-                'product_code'      => $row[4],
-                'brand'        => $row[5],
-            ];
-        }
-
-
-        foreach ($products as $key => $product) {
+        //     $products[] = [
+        //         'name' => trim($row[0]),
+        //         'price'    => (float) str_replace(',', '.', $row[1]),
+        //         'sale_price'   => (float) str_replace(',', '.', $row[2]),
+        //         'stock_quantity'        => (int) $row[3],
+        //         'product_code'      => $row[4],
+        //         'brand'        => $row[5],
+        //     ];
+        // }
 
 
+        // foreach ($products as $key => $product) {
 
-            $brand = Brand::whereRaw(
-                'LOWER(name) LIKE ?',
-                ['%' . strtolower($product['brand']) . '%']
-            )->first();
 
-            if(!isset($brand)){
-                $brand = Brand::create([
-                    'name' => $product['brand']
-                ]);
-            }
-            else {
-                $this->info($brand->name);
-            }
-            if(Product::where('product_code',$product['product_code'])->count() == 0){
-                Product::create([
-                    'name' => $product['name'],
-                    'product_code' => $product['product_code'],
-                    'stock_quantity' => $product['stock_quantity'],
-                    'price' => $product['price'],
-                    'sale_price' => $product['sale_price'],
-                    'brand_id' => $brand->id
-                ]);
-            }
-        }
 
-        logger($products);
+        //     $brand = Brand::whereRaw(
+        //         'LOWER(name) LIKE ?',
+        //         ['%' . strtolower($product['brand']) . '%']
+        //     )->first();
+
+        //     if(!isset($brand)){
+        //         $brand = Brand::create([
+        //             'name' => $product['brand']
+        //         ]);
+        //     }
+        //     else {
+        //         $this->info($brand->name);
+        //     }
+        //     if(Product::where('product_code',$product['product_code'])->count() == 0){
+        //         Product::create([
+        //             'name' => $product['name'],
+        //             'product_code' => $product['product_code'],
+        //             'stock_quantity' => $product['stock_quantity'],
+        //             'price' => $product['price'],
+        //             'sale_price' => $product['sale_price'],
+        //             'brand_id' => $brand->id
+        //         ]);
+        //     }
+        // }
+
+        // logger($products);
 
         return 0;
     }
