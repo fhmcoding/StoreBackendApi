@@ -66,12 +66,14 @@ class User extends Authenticatable
 
     public function getCreditAttribute(): float
     {
-        $ordersTotal = $this->orders()
-        ->selectRaw('SUM(quantity * price)')
-        ->value(DB::raw('SUM(quantity * price)'));
+         $ordersTotal = DB::table('order_products')
+        ->join('orders', 'orders.id', '=', 'order_products.order_id')
+        ->where('orders.user_id', $this->id)
+        ->selectRaw('COALESCE(SUM(order_products.quantity * order_products.price), 0)')
+        ->value(DB::raw('SUM(order_products.quantity * order_products.price)'));
 
-        $paymentsTotal = $this->payments()->sum('amount');
+    $paymentsTotal = $this->payments()->sum('amount');
 
-        return $ordersTotal - $paymentsTotal;
+    return $ordersTotal - $paymentsTotal;
     }
 }
