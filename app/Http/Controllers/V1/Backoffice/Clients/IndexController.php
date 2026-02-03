@@ -14,10 +14,17 @@ class IndexController extends Controller
 
     public function __invoke(Request $request)
     {
+        /*
+            credit = valid orders - payments
+        */
+
+
         return $this->success(
             UserResource::collection(
                 QueryBuilder::for(User::class)
                     ->where('type','client')
+                    ->withSum('orders', 'amount')
+                    ->withSum('payments', 'amount')
                     ->allowedFilters('first_name', 'last_name','type')
                     ->allowedIncludes('roles')
                     ->optionalPagination()

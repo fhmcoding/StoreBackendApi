@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Traits\OptionalPagination;
-
+use DB;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens, HasRoles, OptionalPagination;
@@ -66,7 +66,12 @@ class User extends Authenticatable
 
     public function getCreditAttribute(): float
     {
-        return $this->orders()->sum('total')
-            - $this->payments()->sum('amount');
+        $ordersTotal = $this->orders()
+        ->selectRaw('SUM(quantity * price)')
+        ->value(DB::raw('SUM(quantity * price)'));
+
+        $paymentsTotal = $this->payments()->sum('amount');
+
+        return $ordersTotal - $paymentsTotal;
     }
 }
