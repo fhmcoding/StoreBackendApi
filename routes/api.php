@@ -68,6 +68,11 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
             App\Http\Controllers\V1\Backoffice\Clients\ShowController::class
         )->middleware('permission:user-list')->name('show');
 
+        Route::put(
+            '/{user}',
+            App\Http\Controllers\V1\Backoffice\Clients\UpdateController::class
+        )->middleware('permission:user-edit')->name('eduit');
+
         Route::delete(
             '/{user}',
             App\Http\Controllers\V1\Backoffice\Clients\DestroyController::class
