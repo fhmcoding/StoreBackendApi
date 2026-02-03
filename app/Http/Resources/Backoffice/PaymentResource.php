@@ -18,6 +18,7 @@ class PaymentResource extends JsonResource
             'id' => $this->id,
             'status' => $this->status,
             'amount' => $this->amount,
+            'payment_method' => $this->payment_method,
             // 'order' => UserResource::make($this->whenLoaded('order')),
             // 'user' => UserResource::make($this->whenLoaded('user')),
             'created_at'=>$this->created_at
