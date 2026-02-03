@@ -23,8 +23,6 @@ class IndexController extends Controller
             UserResource::collection(
                 QueryBuilder::for(User::class)
                     ->where('type','client')
-                    ->withSum('orders', 'amount')
-                    ->withSum('payments', 'amount')
                     ->allowedFilters('first_name', 'last_name','type')
                     ->allowedIncludes('roles')
                     ->optionalPagination()
