@@ -58,6 +58,11 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
             App\Http\Controllers\V1\Backoffice\Clients\IndexController::class
         )->middleware('permission:user-list')->name('index');
 
+        Route::post(
+            '/',
+            App\Http\Controllers\V1\Backoffice\Clients\StoreController::class
+        )->middleware('permission:user-create')->name('create');
+
 
     });
 

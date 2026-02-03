@@ -17,6 +17,7 @@ class IndexController extends Controller
         return $this->success(
             UserResource::collection(
                 QueryBuilder::for(User::class)
+                    ->where('type','client')
                     ->allowedFilters('first_name', 'last_name','type')
                     ->allowedIncludes('roles')
                     ->optionalPagination()
