@@ -13,4 +13,14 @@ class Payment extends Model
 
     protected $guarded = ['id'];
 
+
+    public function user():BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function order():BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
 }
