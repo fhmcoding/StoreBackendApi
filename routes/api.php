@@ -77,6 +77,13 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
             '/{user}',
             App\Http\Controllers\V1\Backoffice\Clients\DestroyController::class
         )->middleware('permission:user-delete')->name('delete');
+    });
+
+    Route::prefix('payments')->as('payments:')->group(function () {
+        Route::get(
+            '/',
+            App\Http\Controllers\V1\Backoffice\Payments\IndexController::class
+        )->middleware('permission:user-list')->name('index');
 
 
     });
