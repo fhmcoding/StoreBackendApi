@@ -63,6 +63,11 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
             App\Http\Controllers\V1\Backoffice\Clients\StoreController::class
         )->middleware('permission:user-create')->name('create');
 
+        Route::delete(
+            '/{user}',
+            App\Http\Controllers\V1\Backoffice\Clients\DestroyController::class
+        )->middleware('permission:user-delete')->name('delete');
+
 
     });
 
