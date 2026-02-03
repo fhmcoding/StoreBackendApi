@@ -49,7 +49,16 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
         Route::delete(
             '/{user}',
             App\Http\Controllers\V1\Backoffice\Users\DestroyController::class
-        )->middleware('permission:user-delete')->name('delete');;
+        )->middleware('permission:user-delete')->name('delete');
+    });
+
+    Route::prefix('clients')->as('clients:')->group(function () {
+        Route::get(
+            '/',
+            App\Http\Controllers\V1\Backoffice\Clients\IndexController::class
+        )->middleware('permission:user-list')->name('index');
+
+
     });
 
     Route::prefix('roles')->as('roles:')->group(function () {
