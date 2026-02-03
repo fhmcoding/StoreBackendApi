@@ -59,4 +59,14 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    public function payments():HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function getCreditAttribute(): float
+    {
+        return $this->orders()->sum('total')
+            - $this->payments()->sum('amount');
+    }
 }
