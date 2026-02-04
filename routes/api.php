@@ -90,6 +90,11 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
             App\Http\Controllers\V1\Backoffice\Payments\UpdateStatusController::class
         )->middleware('permission:user-list')->name('edit');
 
+        Route::post(
+            '/',
+            App\Http\Controllers\V1\Backoffice\Payments\StoreController::class
+        )->middleware('permission:user-list')->name('create');
+
 
     });
 
