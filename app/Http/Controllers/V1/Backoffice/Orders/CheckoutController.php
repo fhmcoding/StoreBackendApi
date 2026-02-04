@@ -32,7 +32,7 @@ class CheckoutController extends Controller
                     'product_id' => $p->id,
                     'quantity' => $product['quantity'],
                     'price' => $product['price'],
-                    'original_price' => $p->price
+                    'original_price' => $product['price'],
                 ]);
             }
         }

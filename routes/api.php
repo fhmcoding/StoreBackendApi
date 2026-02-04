@@ -56,44 +56,44 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
         Route::get(
             '/',
             App\Http\Controllers\V1\Backoffice\Clients\IndexController::class
-        )->middleware('permission:user-list')->name('index');
+        )->middleware('permission:client-list')->name('index');
 
         Route::post(
             '/',
             App\Http\Controllers\V1\Backoffice\Clients\StoreController::class
-        )->middleware('permission:user-create')->name('create');
+        )->middleware('permission:client-create')->name('create');
 
          Route::get(
             '/{id}',
             App\Http\Controllers\V1\Backoffice\Clients\ShowController::class
-        )->middleware('permission:user-list')->name('show');
+        )->middleware('permission:client-list')->name('show');
 
         Route::put(
             '/{user}',
             App\Http\Controllers\V1\Backoffice\Clients\UpdateController::class
-        )->middleware('permission:user-edit')->name('edit');
+        )->middleware('permission:client-edit')->name('edit');
 
         Route::delete(
             '/{user}',
             App\Http\Controllers\V1\Backoffice\Clients\DestroyController::class
-        )->middleware('permission:user-delete')->name('delete');
+        )->middleware('permission:client-delete')->name('delete');
     });
 
     Route::prefix('payments')->as('payments:')->group(function () {
         Route::get(
             '/',
             App\Http\Controllers\V1\Backoffice\Payments\IndexController::class
-        )->middleware('permission:user-list')->name('index');
+        )->middleware('permission:payment-list')->name('index');
 
         Route::put(
             '/{payment}',
             App\Http\Controllers\V1\Backoffice\Payments\UpdateStatusController::class
-        )->middleware('permission:user-list')->name('edit');
+        )->middleware('permission:payment-list')->name('edit');
 
         Route::post(
             '/',
             App\Http\Controllers\V1\Backoffice\Payments\StoreController::class
-        )->middleware('permission:user-list')->name('create');
+        )->middleware('permission:payment-create')->name('create');
 
 
     });
