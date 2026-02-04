@@ -71,7 +71,7 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
         Route::put(
             '/{user}',
             App\Http\Controllers\V1\Backoffice\Clients\UpdateController::class
-        )->middleware('permission:user-edit')->name('eduit');
+        )->middleware('permission:user-edit')->name('edit');
 
         Route::delete(
             '/{user}',
@@ -84,6 +84,11 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
             '/',
             App\Http\Controllers\V1\Backoffice\Payments\IndexController::class
         )->middleware('permission:user-list')->name('index');
+
+        Route::put(
+            '/{payment}',
+            App\Http\Controllers\V1\Backoffice\Payments\UpdateStatusController::class
+        )->middleware('permission:user-list')->name('edit');
 
 
     });

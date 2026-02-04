@@ -24,4 +24,9 @@ class Payment extends Model
     {
         return $this->belongsTo(Order::class);
     }
+
+      public function statusHistory():HasMany
+    {
+        return $this->hasMany(PaymentStatusHistory::class);
+    }
 }
