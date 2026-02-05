@@ -19,7 +19,7 @@ class StoreController extends Controller
                     'last_name' => $request->input('last_name'),
                     'phone_number' => $request->input('phone_number'),
                     'password' => bcrypt($request->input('password')),
-                    'type' => $request->type,
+                    'type' => 'user',
                     'tpe' => $request->tpe ?? true,
                     'cache' => $request->cache ?? true,
                     'credit' => $request->credit ?? false,
