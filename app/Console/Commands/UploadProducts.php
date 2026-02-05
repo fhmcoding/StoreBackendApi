@@ -43,6 +43,7 @@ class UploadProducts extends Command
     {
 
         \App\Models\Order::query()->delete();
+        \App\Models\OrderProduct::query()->delete();
         \App\Models\Payment::query()->delete();
 
         // $path = public_path('products.csv');
