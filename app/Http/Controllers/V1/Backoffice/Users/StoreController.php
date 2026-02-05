@@ -20,11 +20,11 @@ class StoreController extends Controller
                     'phone_number' => $request->input('phone_number'),
                     'password' => bcrypt($request->input('password')),
                     'type' => $request->type,
-                    'tpe' => $request->tpe,
-                    'cache' => $request->cache,
-                    'credit' => $request->credit,
-                    'virement' => $request->virement,
-                    'cheque' => $request->cheque
+                    'tpe' => $request->tpe ?? true,
+                    'cache' => $request->cache ?? true,
+                    'credit' => $request->credit ?? false,
+                    'virement' => $request->virement ?? false ,
+                    'cheque' => $request->cheque ?? false
                 ])->assignRole($request->input('role_id'))
             )
         );
