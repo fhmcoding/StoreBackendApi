@@ -26,7 +26,17 @@ class User extends Authenticatable
 
 
     protected $fillable = [
-        'first_name', 'last_name', 'phone_number', 'password', 'is_active','type','cache','tpe','virement','cheque','credit'
+        'first_name',
+        'last_name',
+        'phone_number',
+        'password',
+        'is_active',
+        'type',
+        'cache',
+        'tpe',
+        'virement',
+        'cheque',
+        'credit'
     ];
 
     /**
@@ -64,7 +74,7 @@ class User extends Authenticatable
         return $this->hasMany(Payment::class);
     }
 
-    public function getCreditAttribute(): float
+    public function getTotalCreditAttribute(): float
     {
          $ordersTotal = DB::table('order_products')
         ->join('orders', 'orders.id', '=', 'order_products.order_id')

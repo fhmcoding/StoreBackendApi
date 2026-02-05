@@ -20,7 +20,7 @@ class UserResource extends JsonResource
             'last_name' => $this->last_name,
             'phone_number' => $this->phone_number,
             'type' => $this->type,
-            'credit' => $this->credit,
+            'credit' => $this->total_credit,
             'is_active'=>$this->is_active,
             'roles'=> RoleResource::collection($this->roles),
             'payment_methods' => [
