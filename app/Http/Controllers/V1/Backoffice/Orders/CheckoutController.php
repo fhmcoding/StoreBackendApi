@@ -36,13 +36,15 @@ class CheckoutController extends Controller
                 ]);
             }
         }
-
-        Payment::create([
-            'user_id' => $order->user_id,
-            'order_id' => $order->id,
-            'amount' => $request->total,
-            'payment_method' => $request->payment_method
-        ]);
+        if($request->payment_method !== 'credit'){
+            Payment::create([
+                'user_id' => $order->user_id,
+                'order_id' => $order->id,
+                'amount' => $request->total,
+                'payment_method' => $request->payment_method,
+                'status' => $request->payment_method == 'cash' ? 'confirmed' : 'pending'
+            ]);
+        }
 
         return $this->success(OrderResource::make($order));
 
