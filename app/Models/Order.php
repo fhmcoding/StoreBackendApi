@@ -36,13 +36,13 @@ class Order extends Model
             $model->order_ref = $model->generateOrdeReference();
         });
 
-         if(Auth::check()){
-            if(!Auth::guard('user')->user()->isHasPermission('orders-all')){
-                static::addGlobalScope('user', static function (Builder $builder): void {
-                    $builder->where('caissier_id', Auth::user()->id);
-                });
-            }
-        }
+        // if(Auth::check()){
+        //     if(!Auth::guard('user')->user()->isHasPermission('orders-all')){
+        //         static::addGlobalScope('user', static function (Builder $builder): void {
+        //             $builder->where('caissier_id', Auth::user()->id);
+        //         });
+        //     }
+        // }
     }
 
     public function customer():BelongsTo
