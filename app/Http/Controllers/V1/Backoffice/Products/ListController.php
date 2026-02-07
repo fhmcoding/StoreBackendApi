@@ -24,6 +24,7 @@ class ListController extends Controller
                 QueryBuilder::for(Product::class)
                      ->with('images','category','brand')
                     ->allowedIncludes('category','brand')
+                    ->allowedFilters('name','brand_id','product_code')
                     ->latest()
                     ->optionalPagination()
             )->response()->getData(true)

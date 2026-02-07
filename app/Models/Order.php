@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
 use App\Traits\OptionalPagination;
+use Illuminate\Support\Facades\Auth;
 
 class Order extends Model
 {
@@ -34,6 +35,14 @@ class Order extends Model
         self::created(function($model){
             $model->order_ref = $model->generateOrdeReference();
         });
+
+         if(Auth::check()){
+            if(!Auth::guard('user')->user()->isHasPermission('orders-all')){
+                static::addGlobalScope('user', static function (Builder $builder): void {
+                    $builder->where('caissier_id', Auth::user()->id);
+                });
+            }
+        }
     }
 
     public function customer():BelongsTo

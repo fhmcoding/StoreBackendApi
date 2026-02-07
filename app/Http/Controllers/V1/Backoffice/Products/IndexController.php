@@ -17,6 +17,7 @@ class IndexController extends Controller
             ProductResource::collection(
                 QueryBuilder::for(Product::class)
                     ->with('images','category','brand')
+                    ->allowedFilters('name','brand_id','product_code')
                     ->allowedIncludes('category','brand')
                     ->latest()
                     ->optionalPagination()
