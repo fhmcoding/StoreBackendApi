@@ -36,7 +36,7 @@ class CheckoutController extends Controller
                 ]);
             }
         }
-        if($request->payment_method !== 'credit'){
+        if($request->payment_method !== 'credit' && $request->payment_method !== 'mixte'){
             Payment::create([
                 'user_id' => $order->user_id,
                 'order_id' => $order->id,
@@ -44,6 +44,18 @@ class CheckoutController extends Controller
                 'payment_method' => $request->payment_method,
                 'status' => $request->payment_method == 'cash' ? 'confirmed' : 'pending'
             ]);
+        }
+
+        if($request->payment_method == 'mixte'){
+            foreach ($request->payments as  $payment) {
+                Payment::create([
+                    'user_id' => $order->user_id,
+                    'order_id' => $order->id,
+                    'amount' => $payment['amount'],
+                    'payment_method' => $payment['payment_method'],
+                    'status' => $request->payment_method == 'cash' ? 'confirmed' : 'pending'
+                ]);
+            }
         }
 
         return $this->success(OrderResource::make($order));
