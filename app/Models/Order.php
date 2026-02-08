@@ -37,7 +37,7 @@ class Order extends Model
         });
 
         if(Auth::check()){
-            if(!Auth::guard('user')->user()->isHasPermission('orders-all')){
+            if(!Auth::guard('user')->user()->can('orders-all')){
                 static::addGlobalScope('user', static function (Builder $builder): void {
                     $builder->where('caissier_id', Auth::user()->id);
                 });
