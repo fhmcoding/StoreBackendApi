@@ -23,6 +23,7 @@ class UsersController extends Controller
        return $this->success(
             UserResource::collection(
                 QueryBuilder::for(User::class)
+                    ->where('type','user')
                     ->allowedFilters('name', 'email')
                     ->allowedIncludes('roles')
                     ->get()
