@@ -8,6 +8,7 @@ use App\Http\Resources\Backoffice\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class ListController extends Controller
 {
@@ -24,7 +25,7 @@ class ListController extends Controller
                 QueryBuilder::for(Product::class)
                      ->with('images','category','brand')
                     ->allowedIncludes('category','brand')
-                    ->allowedFilters('name','brand_id','product_code')
+                    ->allowedFilters(['name','product_code',AllowedFilter::exact("brand_id")])
                     ->latest()
                     ->optionalPagination()
             )->response()->getData(true)
