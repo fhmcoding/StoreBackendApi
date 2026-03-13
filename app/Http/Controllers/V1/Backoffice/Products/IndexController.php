@@ -18,7 +18,7 @@ class IndexController extends Controller
             ProductResource::collection(
                 QueryBuilder::for(Product::class)
                     ->with('images','category','brand')
-                    ->allowedFilters('name','product_code')
+                    // ->allowedFilters('name','product_code')
                     ->allowedIncludes('category','brand')
                     ->where('brand_id',$request->filter['brand_id'] ?? null)
                     ->latest()
