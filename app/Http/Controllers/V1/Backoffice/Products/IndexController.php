@@ -8,6 +8,7 @@ use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Spatie\QueryBuilder\QueryBuilder;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\AllowedFilter;
 
 
 class IndexController extends Controller
@@ -18,9 +19,9 @@ class IndexController extends Controller
             ProductResource::collection(
                 QueryBuilder::for(Product::class)
                     ->with('images','category','brand')
-                    // ->allowedFilters('name','product_code')
+                    ->allowedFilters(['name','product_code',AllowedFilter::exact("brand_id")])
                     ->allowedIncludes('category','brand')
-                    ->where('brand_id',$request->filter['brand_id'] ?? null)
+                    // ->where('brand_id',$request->filter['brand_id'] ?? null)
                     ->latest()
                     ->optionalPagination()
             )->response()->getData(true)
