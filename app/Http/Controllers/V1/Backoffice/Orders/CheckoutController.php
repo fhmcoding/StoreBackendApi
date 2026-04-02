@@ -34,6 +34,10 @@ class CheckoutController extends Controller
                     'price' => $product['price'],
                     'original_price' => $product['price'],
                 ]);
+
+                $p->update([
+                    'stock_quantity' => $p->stock_quantity - $product['quantity']
+                ]);
             }
         }
         if($request->payment_method !== 'credit' && $request->payment_method !== 'mixte'){
