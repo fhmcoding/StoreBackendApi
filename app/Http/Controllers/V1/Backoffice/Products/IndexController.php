@@ -22,6 +22,9 @@ class IndexController extends Controller
                     ->allowedFilters(['name','product_code',AllowedFilter::exact("brand_id")])
                     ->allowedIncludes('category','brand')
                     // ->where('brand_id',$request->filter['brand_id'] ?? null)
+                    ->when($request->has('stock_quantity'), function ($query) {
+                        $query->where('stock_quantity', '>', 0);
+                    })
                     ->latest()
                     ->optionalPagination()
             )->response()->getData(true)
