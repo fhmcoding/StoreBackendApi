@@ -308,6 +308,13 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
             '/summary',
             App\Http\Controllers\V1\Backoffice\Statistic\SummaryController::class
         )->middleware('permission:statistic-summary')->name('summary');
+
+        Route::get(
+            '/stock',
+            App\Http\Controllers\V1\Backoffice\Statistic\StockValueController::class
+        )->middleware('permission:stock-summary')->name('stock');
+
+
     });
 
 
