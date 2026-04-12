@@ -48,9 +48,9 @@ class IndexController extends Controller
 
 
         return $this->success(
-            ProductResource::collection(
+
                 $products
-            )->response()->getData(true)
+
         );
 
         // return $this->success(
