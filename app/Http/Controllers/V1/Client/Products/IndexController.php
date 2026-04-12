@@ -48,7 +48,7 @@ class IndexController extends Controller
 
 
         return $this->success(
-            $products
+            $grouped
         );
 
         // return $this->success(
