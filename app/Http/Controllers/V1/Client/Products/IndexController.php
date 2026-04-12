@@ -20,8 +20,10 @@ class IndexController extends Controller
                     ->with("images")
                     ->allowedIncludes('category','brand')
                     ->allowedFilters('category.name','brand.name','name')
-                    ->where('stock_quantity', '>', 0)
-                    ->where('sale_price','>',0)
+                    ->where([
+                        ['stock_quantity', '>', 0],
+                        ['sale_price', '>', 0],
+                    ])
                     ->latest()
                     ->optionalPagination();
 
