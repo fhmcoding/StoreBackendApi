@@ -17,7 +17,6 @@ class IndexController extends Controller
         // with offers
 
         $products = QueryBuilder::for(Product::class)
-                    ->with('products','products.offers')
                     ->allowedIncludes('category','brand')
                     ->allowedFilters('category.name','brand.name','name')
                     ->where('stock_quantity', '>', 0)
