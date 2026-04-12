@@ -21,6 +21,7 @@ class IndexController extends Controller
                     ->allowedIncludes('category','brand')
                     ->allowedFilters('category.name','brand.name','name')
                     ->where('stock_quantity', '>', 0)
+                    ->where('sale_price','>',0)
                     ->get();
 
         $grouped = $products->map(function ($product) {
