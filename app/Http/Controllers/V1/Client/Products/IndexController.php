@@ -55,7 +55,7 @@ class IndexController extends Controller
                         'description' => $item['description'],
                         'image_url' => $item['image_url'],
                         'size' => $item['size'],
-                        'sale_price' => $item['price'],
+                        'price' => $item['price'],
                         'category' => $item['category'],
                         'brand' => $item['brand']
                     ];
