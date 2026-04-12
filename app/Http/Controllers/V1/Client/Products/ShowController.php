@@ -14,7 +14,6 @@ class ShowController extends Controller
     public function __invoke(Product $product):JsonResponse
     {
 
-        $product = Product::findOrFail($id);
 
         preg_match('/(\d+\s?ml)$/i', $product->name, $matches);
 
