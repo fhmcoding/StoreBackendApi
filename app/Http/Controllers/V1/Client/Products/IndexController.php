@@ -23,6 +23,7 @@ class IndexController extends Controller
                     ->where([
                         ['stock_quantity', '>', 0],
                         ['sale_price', '>', 0],
+                        ['price', '>', 0],
                     ])
                     ->latest()
                     ->optionalPagination();
