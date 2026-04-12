@@ -7,6 +7,7 @@ use App\Http\Resources\Client\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Spatie\QueryBuilder\QueryBuilder;
+use Storage;
 
 class IndexController extends Controller
 {
@@ -14,21 +15,21 @@ class IndexController extends Controller
     public function __invoke():JsonResponse
     {
         // with offers
-        logger('from IndexController');
-        $products = Product::where('stock_quantity', '>', 0)->get();
+        $products = Product::with('category','brand')->where('stock_quantity', '>', 0)->get();
 
         $grouped = $products->map(function ($product) {
-            // Extract size (e.g. 30ML, 50ML)
-            preg_match('/(\d+ML)$/', $product->name, $matches);
-            $size = $matches[1] ?? null;
+
+            // Extract size (supports: 30ML, 30 ML, 30ml, etc.)
+            preg_match('/(\d+\s?ml)$/i', $product->name, $matches);
+            $size = isset($matches[1]) ? strtoupper(str_replace(' ', '', $matches[1])) : null;
 
             // Remove size from name
-            $baseName = trim(preg_replace('/\s*\d+ML$/', '', $product->name));
+            $baseName = trim(preg_replace('/\s*\d+\s?ml$/i', '', $product->name));
 
             return [
                 'base_name' => $baseName,
                 'size' => $size,
-                'price' => $product->sale_price,
+                'price' => $product->price,
             ];
         })
         ->groupBy('base_name')
@@ -37,8 +38,14 @@ class IndexController extends Controller
                 'name' => $name,
                 'products' => $items->map(function ($item) {
                     return [
+                        'id' => $item['id'],
+                        'product_code' => $item['product_code'],
+                        'description' => $item['description'],
+                        'image_url' => count($item['images']) > 0 ? Storage::disk('public')->url($item['images'][0]['image_url']) : null,
                         'size' => $item['size'],
-                        'price' => $item['price'],
+                        'sale_price' => $item['price'],
+                        'category' => $item['category'],
+                        'brand' => $item['brand']
                     ];
                 })->values()
             ];
