@@ -17,7 +17,7 @@ class IndexController extends Controller
         return $this->success(
             ProductResource::collection(
                 QueryBuilder::for(Product::class)
-                    ->with('products','products.offers')
+                    // ->with('products','products.offers')
                     ->allowedIncludes('category','brand')
                     ->allowedFilters('category.name','brand.name','name')
                     // ->active()
