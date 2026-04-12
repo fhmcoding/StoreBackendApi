@@ -35,7 +35,6 @@ class IndexController extends Controller
             return [
                 'base_name' => $baseName,
                 'size' => $size,
-                'price' => $product->price,
                 'id' => $product->id,
                 'product_code' => $product->product_code,
                 'description' => $product->description,
