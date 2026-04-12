@@ -42,11 +42,10 @@ class ShowController extends Controller
             })->values()
         ];
 
+        $product->products = $similarProducts;
+
         return $this->success(
-            [
-                'product' => $product,
-                'similarProducts'=>$result
-            ]
+            $product
         );
     }
 }
