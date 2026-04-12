@@ -19,7 +19,7 @@ class UpdateController extends Controller
                         'first_name' => $request->input('first_name'),
                         'last_name' => $request->input('last_name'),
                         'phone_number' => $request->input('phone_number'),
-                        'password' => bcrypt($request->input('password')),
+                        //'password' => bcrypt($request->input('password')),
                         'tpe' => $request->tpe,
                         'cache' => $request->cache,
                         'credit' => $request->credit,
