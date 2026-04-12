@@ -40,7 +40,6 @@ class IndexController extends Controller
                 'product_code' => $product->product_code,
                 'description' => $product->description,
                 'image_url' => count($product->images) > 0 ? Storage::disk('public')->url($product->images[0]->image_url) : null,
-                'size' => $product->size,
                 'sale_price' => $product->price,
                 'category' => $product->category,
                 'brand' => $product->brand
