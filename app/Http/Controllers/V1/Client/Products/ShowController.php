@@ -14,12 +14,13 @@ class ShowController extends Controller
     public function __invoke(Product $product):JsonResponse
     {
 
+        $product->load('brand');
 
         preg_match('/(\d+\s?ml)$/i', $product->name, $matches);
 
         $baseName = trim(preg_replace('/(\s*\d+\s?ml)$/i', '', $product->name));
 
-        $similarProducts = Product::where('name', 'LIKE', $baseName . '%')->get();
+        $similarProducts = Product::with('category','brand','images')->where('name', 'LIKE', $baseName . '%')->get();
 
         $result = [
             'name' => $baseName,
