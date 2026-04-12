@@ -24,7 +24,7 @@ class ShowController extends Controller
 
         $similarProducts = Product::with('category','brand','images')->where('name', 'LIKE', $baseName . '%')->get();
 
-
+        $product->offers = [];
         $product->name = $baseName;
         $product->products = $similarProducts->map(function ($item) {
 
@@ -38,6 +38,7 @@ class ShowController extends Controller
                     'product_code' => $item->product_code,
                     'size'  => $size,
                     'price' => $item->price,
+                    'offers' => []
                 ];
             })->values();
 
