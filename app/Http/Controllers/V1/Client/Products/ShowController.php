@@ -24,9 +24,9 @@ class ShowController extends Controller
 
         $similarProducts = Product::with('category','brand','images')->where('name', 'LIKE', $baseName . '%')->get();
 
-        $result = [
-            'name' => $baseName,
-            'products' => $similarProducts->map(function ($item) {
+
+
+        $product->products = $similarProducts->map(function ($item) {
 
                 preg_match('/(\d+\s?ml)$/i', $item->name, $matches);
                 $size = isset($matches[1])
@@ -39,10 +39,7 @@ class ShowController extends Controller
                     'size' => $size,
                     'price' => $item->price,
                 ];
-            })->values()
-        ];
-
-        $product->products = $similarProducts;
+            })->values();
 
         return $this->success(
             $product
