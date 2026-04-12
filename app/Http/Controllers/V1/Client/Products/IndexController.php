@@ -22,7 +22,8 @@ class IndexController extends Controller
                     ->allowedFilters('category.name','brand.name','name')
                     ->where('stock_quantity', '>', 0)
                     ->where('sale_price','>',0)
-                    ->get();
+                    ->latest()
+                    ->optionalPagination();
 
         $grouped = $products->map(function ($product) {
 
