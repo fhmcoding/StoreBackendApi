@@ -15,7 +15,7 @@ class IndexController extends Controller
     public function __invoke():JsonResponse
     {
         // with offers
-        $products = Product::with('category','brand')->where('stock_quantity', '>', 0)->get();
+        $products = Product::with('category','brand','images')->where('stock_quantity', '>', 0)->get();
 
         $grouped = $products->map(function ($product) {
 
@@ -30,6 +30,14 @@ class IndexController extends Controller
                 'base_name' => $baseName,
                 'size' => $size,
                 'price' => $product->price,
+                'id' => $product->id,
+                'product_code' => $product->product_code,
+                'description' => $product->description,
+                'image_url' => count($product->images) > 0 ? Storage::disk('public')->url($product->images[0]->image_url) : null,
+                'size' => $item->size,
+                'sale_price' => $item->price,
+                'category' => $item->category,
+                'brand' => $item->brand
             ];
         })
         ->groupBy('base_name')
@@ -41,7 +49,7 @@ class IndexController extends Controller
                         'id' => $item['id'],
                         'product_code' => $item['product_code'],
                         'description' => $item['description'],
-                        'image_url' => count($item['images']) > 0 ? Storage::disk('public')->url($item['images'][0]['image_url']) : null,
+                        'image_url' => $item['image_url'],
                         'size' => $item['size'],
                         'sale_price' => $item['price'],
                         'category' => $item['category'],
