@@ -14,10 +14,10 @@ class IndexController extends Controller
     public function __invoke():JsonResponse
     {
         // with offers
+        logger('from IndexController');
         $products = Product::where('stock_quantity', '>', 0)->get();
 
         $grouped = $products->map(function ($product) {
-
             // Extract size (e.g. 30ML, 50ML)
             preg_match('/(\d+ML)$/', $product->name, $matches);
             $size = $matches[1] ?? null;
@@ -48,9 +48,7 @@ class IndexController extends Controller
 
 
         return $this->success(
-
-                $products
-
+            $products
         );
 
         // return $this->success(
