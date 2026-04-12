@@ -20,7 +20,7 @@ class IndexController extends Controller
         $grouped = $products->map(function ($product) {
 
             // Extract size (supports: 30ML, 30 ML, 30ml, etc.)
-            preg_match('/(\d+\s?ml)$/i', $product->name, $matches);
+            preg_match('/(\d+\s?ML)$/i', $product->name, $matches);
             $size = isset($matches[1]) ? strtoupper(str_replace(' ', '', $matches[1])) : null;
 
             // Remove size from name
