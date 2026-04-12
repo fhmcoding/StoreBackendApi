@@ -15,6 +15,8 @@ class ShowController extends Controller
     {
 
         $product->load('brand');
+        $product->load('category');
+        $product->load('images');
 
         preg_match('/(\d+\s?ml)$/i', $product->name, $matches);
 
