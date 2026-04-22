@@ -30,7 +30,6 @@ class ProfileController extends Controller
         }
 
         if($request->new_password !== null){
-            if($request->new_password == $request->confirm_new_password){
                 if(password_verify($request->input('current_password'), $user->password)){
                     $user->update([
                         'password' => bcrypt($request->input('new_password'))
@@ -38,10 +37,7 @@ class ProfileController extends Controller
                 }else {
                     return response()->json('current password is not correct', 500);
                 }
-            }else {
-                return response()->json('new password and confirm new password not the same', 500);
 
-            }
         }
 
         return $this->success(
