@@ -30,13 +30,13 @@ class ProfileController extends Controller
         }
 
         if($request->new_password !== null){
-                if(password_verify($request->input('current_password'), $user->password)){
+                // if(password_verify($request->input('current_password'), $user->password)){
                     $user->update([
                         'password' => bcrypt($request->input('new_password'))
                     ]);
-                }else {
-                    return response()->json('current password is not correct', 500);
-                }
+                // }else {
+                //     return response()->json('current password is not correct', 500);
+                // }
 
         }
 
