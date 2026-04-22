@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
             'phone_number' => 'required',
             'password' => 'min:8|max:100',
             'role_id' => 'required|exists:roles,id',
-            'is_active'=>'required|boolean'
+            'is_active'=>'nullable|boolean'
         ];
 
         // if (
