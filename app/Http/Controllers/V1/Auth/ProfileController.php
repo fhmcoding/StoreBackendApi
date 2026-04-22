@@ -36,10 +36,10 @@ class ProfileController extends Controller
                         'password' => bcrypt($request->input('new_password'))
                     ]);
                 }else {
-                    return response()->json('current password is not correct', $statusCode);
+                    return response()->json('current password is not correct', 500);
                 }
             }else {
-                return response()->json('new password and confirm new password not the same', $statusCode);
+                return response()->json('new password and confirm new password not the same', 500);
 
             }
         }
