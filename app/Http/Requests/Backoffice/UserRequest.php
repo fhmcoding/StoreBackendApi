@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
             'last_name' => 'required|max:100',
             'phone_number' => 'required',
             'password' => 'min:8|max:100',
-            'role_id' => 'required|exists:roles,id',
+            'role_id' => 'nullable|exists:roles,id',
             'is_active'=>'nullable|boolean'
         ];
 
