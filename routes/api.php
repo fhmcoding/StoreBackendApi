@@ -22,6 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('auth')->group(function () {
     Route::post('/login',App\Http\Controllers\V1\Auth\LoginController::class);
     Route::get('/permissions',App\Http\Controllers\V1\Auth\PermissionsController::class)->middleware(['auth:user','scope:user']);
+    Route::put('/',App\Http\Controllers\V1\Auth\ProfileController::class)->middleware(['auth:user','scope:user']);
+
 });
 
 Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(function () {
