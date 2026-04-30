@@ -22,7 +22,7 @@ class StoreController extends Controller
         return $this->success(
             ExpenseResource::make(
                 Expense::query()->create([
-                    'user_id' => Auth::guard('user')->id,
+                    'user_id' => Auth::guard('user')->user()->id,
                     'refernece' => $request->refernece,
                     'amount' => $request->amount
                 ])
