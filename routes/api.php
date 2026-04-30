@@ -181,6 +181,21 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
         )->middleware('permission:brand-delete')->name('delete');
     });
 
+    Route::prefix('expense')->as('expense:')->group(function () {
+        Route::get(
+            '/',
+            App\Http\Controllers\V1\Backoffice\Expense\IndexController::class
+        )->middleware('permission:expense-list')->name('index');
+
+
+        Route::post(
+            '/',
+            App\Http\Controllers\V1\Backoffice\Expense\StoreController::class
+        )->middleware('permission:expense-create')->name('create');
+
+    });
+
+
     Route::prefix('offers')->as('offers:')->group(function () {
         Route::get(
             '/',
