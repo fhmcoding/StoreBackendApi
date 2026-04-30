@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Expense;
 use App\Http\Resources\Backoffice\ExpenseResource;
 use Illuminate\Http\JsonResponse;
+use Auth;
+
 class StoreController extends Controller
 {
     /**
