@@ -185,7 +185,7 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
         Route::get(
             '/',
             App\Http\Controllers\V1\Backoffice\Expense\IndexController::class
-        )->middleware('permission:expense-list')->name('index');
+        )->name('index');
 
 
         Route::post(

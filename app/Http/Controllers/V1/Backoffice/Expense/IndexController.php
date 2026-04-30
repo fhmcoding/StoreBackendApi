@@ -23,6 +23,7 @@ class IndexController extends Controller
             ExpenseResource::collection(
                 QueryBuilder::for(Expense::class)
                     ->allowedIncludes('user')
+                    ->allowedFilters('user_id','created_at')
                     ->optionalPagination()
             )->response()->getData(true)
         );
