@@ -181,7 +181,7 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
         )->middleware('permission:brand-delete')->name('delete');
     });
 
-    Route::prefix('expense')->as('expense:')->group(function () {
+    Route::prefix('expenses')->as('expenses:')->group(function () {
         Route::get(
             '/',
             App\Http\Controllers\V1\Backoffice\Expense\IndexController::class
