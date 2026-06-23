@@ -28,6 +28,7 @@ class StoreController extends Controller
                     'phone_number' => $request->input('phone_number'),
                     'password' => 'password',
                     'type' => 'client',
+                    'credit_inital' => $request->credit_inital
                     // 'tpe' => $request->tpe,
                     // 'cache' => $request->cache,
                     // 'credit' => $request->credit,

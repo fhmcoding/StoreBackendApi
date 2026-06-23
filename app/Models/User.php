@@ -36,7 +36,8 @@ class User extends Authenticatable
         'tpe',
         'virement',
         'cheque',
-        'credit'
+        'credit',
+        'credit_inital'
     ];
 
     /**
@@ -76,6 +77,7 @@ class User extends Authenticatable
 
     public function getTotalCreditAttribute(): float
     {
+
          $ordersTotal = DB::table('order_products')
         ->join('orders', 'orders.id', '=', 'order_products.order_id')
         ->where('orders.user_id', $this->id)
@@ -84,6 +86,6 @@ class User extends Authenticatable
 
     $paymentsTotal = $this->payments()->sum('amount');
 
-    return $ordersTotal - $paymentsTotal;
+    return $this->credit_inital + ( $ordersTotal - $paymentsTotal);
     }
 }
