@@ -12,6 +12,12 @@ class UpdateController extends Controller
 {
     public function __invoke(UserRequest $request, User $user): JsonResponse
     {
+
+        if($request->has('password') && $request->password !== null & $request->password != ''){
+            $user->update([
+                'password' => bcrypt($request->input('password'))
+            ]);
+        }
         return $this->success(
             UserResource::make(
                 (tap($user)
