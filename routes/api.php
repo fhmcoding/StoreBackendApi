@@ -335,7 +335,7 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
         Route::get(
             '/credit',
             App\Http\Controllers\V1\Backoffice\Statistic\CreditController::class
-        )->middleware('permission:client-credit')->name('credit');
+        )->name('credit');
 
 
     });
