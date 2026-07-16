@@ -332,6 +332,12 @@ Route::prefix('backoffice')->middleware(['auth:user','scope:user'])->group(funct
         )->middleware('permission:stock-summary')->name('stock');
 
 
+        Route::get(
+            '/credit',
+            App\Http\Controllers\V1\Backoffice\Statistic\CreditController::class
+        )->middleware('permission:client-credit')->name('credit');
+
+
     });
 
 
