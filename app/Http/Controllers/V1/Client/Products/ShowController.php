@@ -37,7 +37,7 @@ class ShowController extends Controller
                     'id' => $item->id,
                     'product_code' => $item->product_code,
                     'size'  => $size,
-                    'price' => $item->price,
+                    'price' => $item->sale_price,
                     'offers' => []
                 ];
             })->values();
