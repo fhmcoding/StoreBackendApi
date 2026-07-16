@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
 
 class StockValueController extends Controller
 {
@@ -20,11 +21,20 @@ class StockValueController extends Controller
 
         $products  = Product::where('stock_quantity', '>', 0);
 
+        $clients = User::with('payments','orders')->where('type','client')->get();
+
+        $creditClients = $clients ->filter(function ($user) {
+            return $user->total_credit > 0;
+        });;
+
+
         return response()->json([
             'success' => true,
             'stock_count' => $products->sum('stock_quantity'),
             'price' => $products->sum(DB::raw('price * stock_quantity')),
             'sale_price' => $products->sum(DB::raw('sale_price * stock_quantity')),
+            'creditClients' => $creditClients
+
         ]);
     }
 }
