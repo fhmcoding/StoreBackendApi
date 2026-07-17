@@ -19,7 +19,7 @@ class IndexController extends Controller
                 QueryBuilder::for(Order::class)
                     ->with('user','customer','statusHistory','user','caissier')
                     ->allowedIncludes('products','payments','customer','productsCount')
-                   ->allowedFilters(['user_id','caissier_id',
+                   ->allowedFilters(['user_id','caissier_id','created_at'
                         AllowedFilter::callback('created_from', fn ($query, $value) =>
                             $query->whereDate('created_at', '>=', $value)
                         ),

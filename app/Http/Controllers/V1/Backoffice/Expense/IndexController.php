@@ -8,6 +8,7 @@ use App\Models\Expense;
 use App\Http\Resources\Backoffice\ExpenseResource;
 use Illuminate\Http\JsonResponse;
 use Spatie\QueryBuilder\QueryBuilder;
+use Spatie\QueryBuilder\AllowedFilter;
 
 class IndexController extends Controller
 {
@@ -23,7 +24,14 @@ class IndexController extends Controller
             ExpenseResource::collection(
                 QueryBuilder::for(Expense::class)
                     ->allowedIncludes('user')
-                    ->allowedFilters('user_id','created_at')
+                    ->allowedFilters(['user_id','created_at',
+                    AllowedFilter::callback('created_from', fn ($query, $value) =>
+                            $query->whereDate('created_at', '>=', $value)
+                        ),
+                        AllowedFilter::callback('created_to', fn ($query, $value) =>
+                            $query->whereDate('created_at', '<=', $value)
+                        )
+                        ])
                     ->optionalPagination()
             )->response()->getData(true)
         );
