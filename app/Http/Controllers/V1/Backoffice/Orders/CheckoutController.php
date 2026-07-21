@@ -31,7 +31,7 @@ class CheckoutController extends Controller
                     'order_id'=> $order->id,
                     'product_id' => $p->id,
                     'quantity' => $product['quantity'],
-                    'price' => $product['price'],
+                    'price' =>$product['percentage'] == 0 ? $product['price'] : $product['price'] - (($product['price'] * $product['percentage']) / 100),
                     'original_price' => $product['price'],
                 ]);
 
